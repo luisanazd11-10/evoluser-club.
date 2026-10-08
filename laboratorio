@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Club en línea cada dos semanas para emprendedores que trabajan solos. Season 1: 17 de octubre al 12 de diciembre de 2026.">
+<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Evoluser · Laboratorio de Emprendedores: Season 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: single readable column; hero with a cobalt "next session" ticket, then who / arc / agenda / dates / sign-up.
+   Palette: cherry #D20001, soft pink #FEC6E9, cobalt #0212EE, sand #F3F3E9 */
+:root {
+  --bg: #F3F3E9;
+  --ink: #111111;
+  --muted: #444444;
+  --line: #dcdcd0;
+  --accent: #0212EE;
+  --accent-ink: #ffffff;
+  --cherry: #D20001;
+  --cherry-ink: #ffffff;
+  --pink: #FEC6E9;
+  --pink-ink: #111111;
+  --ticket-bg: #0212EE;
+  --ticket-ink: #F3F3E9;
+  --ticket-accent: #FEC6E9;
+  --ticket-muted: #c9ccff;
+  --ticket-line: rgba(243, 243, 233, .3);
+  --toggle-bg: #ffffff;
+  --tz-head: #e8e8dc;
+  --row-alt: #ebebdf;
+  --font: "Poppins", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0b0c2a; --ink: #F3F3E9; --muted: #b3b4cc; --line: #26285a;
+  --accent: #FEC6E9; --accent-ink: #0b0c2a; --cherry: #ff4b3e; --cherry-ink: #0b0c2a;
+  --pink: #FEC6E9; --pink-ink: #111111;
+  --ticket-bg: #0212EE; --ticket-ink: #F3F3E9; --ticket-accent: #FEC6E9; --ticket-muted: #c9ccff; --ticket-line: rgba(243, 243, 233, .3);
+  --toggle-bg: #14163b; --tz-head: #181a45; --row-alt: #121436;
+  color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --bg: #0b0c2a; --ink: #F3F3E9; --muted: #b3b4cc; --line: #26285a;
+  --accent: #FEC6E9; --accent-ink: #0b0c2a; --cherry: #ff4b3e; --cherry-ink: #0b0c2a;
+  --pink: #FEC6E9; --pink-ink: #111111;
+  --ticket-bg: #0212EE; --ticket-ink: #F3F3E9; --ticket-accent: #FEC6E9; --ticket-muted: #c9ccff; --ticket-line: rgba(243, 243, 233, .3);
+  --toggle-bg: #14163b; --tz-head: #181a45; --row-alt: #121436;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem; line-height: 1.65; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 48px 20px 72px; display: grid; gap: 72px; }
+h1, h2, h3 { font-family: var(--font); line-height: 1.1; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.2rem, 6vw, 3.7rem); font-weight: 800; letter-spacing: -0.03em; }
+h2 { font-size: clamp(1.5rem, 3.4vw, 2rem); font-weight: 700; letter-spacing: -0.02em; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p { margin: 0; }
+.eyebrow { font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--cherry); }
+mark { background: var(--pink); color: var(--pink-ink); padding: 0 .18em; border-radius: 6px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.lede { font-size: 1.12rem; color: var(--muted); max-width: 58ch; }
+
+.topbar { display: flex; justify-content: flex-end; margin-bottom: -48px; }
+.theme-toggle { font: 600 .8rem var(--font); color: var(--ink); background: var(--toggle-bg); border: 1.5px solid var(--line); border-radius: 99px; padding: 6px 14px; cursor: pointer; }
+.theme-toggle:focus-visible { outline: 3px solid var(--cherry); outline-offset: 2px; }
+
+.hero { display: grid; grid-template-columns: 1.25fr 1fr; gap: 40px; align-items: end; }
+.hero-text { display: grid; gap: 20px; min-width: 0; }
+.ticket { background: var(--ticket-bg); color: var(--ticket-ink); border-radius: 18px; padding: 24px; display: grid; gap: 16px; }
+.ticket .eyebrow { color: var(--ticket-accent); }
+.ticket .date { font-size: 1.75rem; font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+.times { display: grid; gap: 6px; font-size: .92rem; font-variant-numeric: tabular-nums; }
+.times div { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dashed var(--ticket-line); padding-bottom: 6px; }
+.times span:first-child { color: var(--ticket-muted); }
+.times span:last-child { font-weight: 600; }
+.countdown { font-size: .95rem; color: var(--ticket-muted); }
+.countdown strong { color: var(--ticket-ink); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 600 .98rem var(--font); padding: 12px 20px; border-radius: 99px; text-decoration: none; border: 2px solid var(--accent); cursor: pointer; }
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-ghost { background: transparent; color: var(--accent); }
+.btn:focus-visible { outline: 3px solid var(--cherry); outline-offset: 2px; }
+.btn[aria-disabled="true"] { opacity: .55; cursor: default; }
+
+.section { display: grid; gap: 28px; }
+.section-head { display: grid; gap: 10px; max-width: 62ch; }
+.who { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+.who li { list-style: none; padding: 22px 22px 22px 0; border-bottom: 1px solid var(--line); display: grid; gap: 6px; }
+.who li:nth-child(odd) { border-right: 1px solid var(--line); }
+.who li:nth-child(even) { padding-left: 22px; }
+.who p { color: var(--muted); }
+ul.who { margin: 0; padding: 0; }
+
+.arc { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 3px solid var(--accent); }
+.arc li { list-style: none; padding: 18px 20px 4px 0; display: grid; gap: 6px; align-content: start; position: relative; }
+.arc li::before { content: ""; position: absolute; top: -9px; left: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--bg); border: 3px solid var(--accent); }
+.arc li:first-child::before, .arc li:last-child::before { background: var(--cherry); border-color: var(--cherry); }
+.arc .phase { font-size: .74rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); padding-top: 6px; }
+.arc li:last-child .phase { color: var(--cherry); }
+.arc p { color: var(--muted); }
+
+.agenda { margin: 0; padding: 0; display: grid; gap: 0; }
+.agenda li { list-style: none; display: grid; grid-template-columns: 92px 1fr; gap: 18px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.agenda .t { font-weight: 600; font-size: .95rem; color: var(--accent); font-variant-numeric: tabular-nums; }
+.agenda p { color: var(--muted); }
+
+.dates-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td.mono { font-weight: 500; }
+th:nth-child(n+3), td:nth-child(n+3) { border-left: 1px solid var(--line); padding-left: 14px; text-align: center; }
+th:nth-child(n+3) { color: var(--ink); background: var(--tz-head); }
+tbody tr:nth-child(even) td { background: var(--row-alt); }
+th:first-child, td:first-child { padding-left: 10px; }
+td:nth-child(2) { white-space: normal; min-width: 130px; }
+th:nth-child(n+3), td:nth-child(n+3) { padding-right: 12px; padding-left: 12px; }
+tr.next td:first-child::after { display: block; width: max-content; margin: 4px 0 0; }
+tr.next td:first-child::after { content: "próxima"; margin-left: 10px; font-size: .68rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; background: var(--cherry); color: var(--cherry-ink); padding: 2px 8px; border-radius: 99px; vertical-align: 2px; }
+tr.party td { color: var(--cherry); font-weight: 600; }
+
+.steps { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; counter-reset: s; }
+.steps li { list-style: none; background: var(--pink); color: var(--pink-ink); border-radius: 18px; padding: 22px; display: grid; gap: 8px; align-content: start; counter-increment: s; }
+.steps li::before { content: counter(s); font-weight: 800; font-size: 1.7rem; line-height: 1; color: #D20001; }
+.steps p { opacity: .85; }
+.steps .btn-primary, .steps .btn-ghost { background: #0212EE; color: #ffffff; border-color: #0212EE; justify-self: start; }
+
+.privacy { font-size: .88rem; color: var(--muted); max-width: 72ch; }
+footer { color: var(--muted); font-size: .88rem; border-top: 1px solid var(--line); padding-top: 20px; }
+
+@media (max-width: 760px) {
+  .wrap { padding-block: 32px 56px; gap: 56px; }
+  .topbar { margin-bottom: -32px; }
+  .hero { grid-template-columns: 1fr; }
+  .who { grid-template-columns: 1fr; }
+  .who li:nth-child(odd) { border-right: 0; }
+  .who li:nth-child(even) { padding-left: 0; }
+  .steps { grid-template-columns: 1fr; }
+  .arc { grid-template-columns: 1fr; border-top: 0; border-left: 3px solid var(--accent); gap: 18px; }
+  .arc li { padding: 0 0 0 22px; }
+  .arc li::before { top: 4px; left: -9px; }
+  .arc .phase { padding-top: 0; }
+  .agenda li { grid-template-columns: 70px 1fr; }
+}
+@media (prefers-reduced-motion: no-preference) { .btn { transition: transform .15s ease; } .btn:hover { transform: translateY(-1px); } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="topbar"><button type="button" class="theme-toggle" id="theme-toggle">Modo oscuro</button></div>
+  <header class="hero">
+    <div class="hero-text">
+      <span class="eyebrow">Evoluser · Laboratorio de Emprendedores: Season 1 · oct–dic 2026</span>
+      <h1>Emprender solo no significa <mark>estar solo</mark>.</h1>
+      <p class="lede">Un encuentro cada dos semanas para quienes están construyendo algo por su cuenta. Cuenta en qué estás, rebota ideas con otras personas y sal con un accountability partner.</p>
+      <div class="actions">
+        <a class="btn btn-primary" id="signup-btn" href="#inscripcion">Quiero inscribirme</a>
+        <a class="btn btn-ghost" id="cal-btn-hero" target="_blank" rel="noopener">Agregar a mi calendario</a>
+      </div>
+    </div>
+    <aside class="ticket" aria-label="Próxima sesión">
+      <span class="eyebrow" id="ticket-label">Primera sesión</span>
+      <div class="date" id="next-date">Sábado 17 de octubre</div>
+      <div class="times">
+        <div><span>Caracas</span><span id="t-ve">10:00 – 11:30</span></div>
+        <div><span>Miami</span><span id="t-ny">10:00 – 11:30</span></div>
+        <div><span>España</span><span id="t-es">16:00 – 17:30</span></div>
+        <div><span>Tu hora</span><span id="t-local">—</span></div>
+      </div>
+      <p class="countdown" id="countdown">Faltan <strong>9 días</strong>.</p>
+    </aside>
+  </header>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="eyebrow">Para quién es</span>
+      <h2>¡Si te reconoces en alguna, este club es para ti!</h2>
+    </div>
+    <ul class="who">
+      <li><h3>No sabes por dónde empezar</h3><p>Tienes la idea o las ganas, pero no un primer paso claro.</p></li>
+      <li><h3>No tienes con quién hablar de esto</h3><p>Tu entorno no emprende y te falta gente que entienda lo que estás viviendo.</p></li>
+      <li><h3>Quieres rebotar ideas</h3><p>Necesitas otras miradas antes de invertir tiempo o dinero en algo.</p></li>
+      <li><h3>Te cuesta mantener el ritmo</h3><p>Buscas un accountability partner que te pregunte, cada dos semanas, si hiciste lo que dijiste.</p></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="eyebrow">Season 1 · 5 sesiones · 17 oct – 12 dic</span>
+      <h2>De la intención a la celebración</h2>
+    </div>
+    <ol class="arc">
+      <li><span class="phase">17 oct · Kick-off</span><h3>Define tus intenciones</h3><p>Nos conocemos y cada persona pone en palabras qué quiere construir y por qué.</p></li>
+      <li><span class="phase">31 oct</span><h3>Fija tu meta del trimestre</h3><p>Convertimos esa intención en una meta concreta y medible para diciembre.</p></li>
+      <li><span class="phase">14 y 28 nov</span><h3>Avances y accountability</h3><p>Revisamos lo que hiciste, destrabamos lo que falta y fijamos el siguiente compromiso.</p></li>
+      <li><span class="phase">12 dic · Cierre de season</span><h3>Celebramos</h3><p>Cada persona comparte lo que logró frente a su meta, reconocemos al grupo y abrimos la Season 2.</p></li>
+    </ol>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="eyebrow">90 minutos · hora de Caracas</span>
+      <h2>Así es una sesión de seguimiento</h2>
+    </div>
+    <ol class="agenda">
+      <li><span class="t">10:00</span><div><h3>Avances</h3><p>Cada persona cuenta qué logró desde la última sesión y dónde se siente trabada.</p></div></li>
+      <li><span class="t">10:25</span><div><h3>Mesa de ideas</h3><p>Dos personas comparten un reto real y el grupo aporta ideas, contactos y buenas preguntas.</p></div></li>
+      <li><span class="t">11:05</span><div><h3>Accountability en parejas</h3><p>Con tu accountability partner defines un compromiso concreto para las próximas dos semanas.</p></div></li>
+      <li><span class="t">11:25</span><div><h3>Cierre</h3><p>Compromisos en voz alta y fecha del siguiente encuentro.</p></div></li>
+    </ol>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="eyebrow">Cada dos semanas, en sábado</span>
+      <h2>Fechas de la Season 1</h2>
+    </div>
+    <div class="dates-wrap">
+      <table>
+        <thead><tr><th>Fecha</th><th>Sesión</th><th>Caracas</th><th>Miami</th><th>España</th><th>Tu hora</th></tr></thead>
+        <tbody id="dates-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="inscripcion">
+    <div class="section-head">
+      <span class="eyebrow">Inscripción y recordatorios</span>
+      <h2>Tres pasos y no te pierdes ninguna</h2>
+    </div>
+    <ol class="steps">
+      <li><h3>Inscríbete</h3><p>Cuéntanos quién eres y en qué etapa estás. Es gratis y toma un minuto.</p><a class="btn btn-primary" id="form-btn" target="_blank" rel="noopener">Abrir formulario</a></li>
+      <li><h3>Agrega la serie a tu calendario</h3><p>Las 5 sesiones de la Season 1 quedan en tu calendario, con los avisos de tu calendario.</p><a class="btn btn-ghost" id="cal-btn" target="_blank" rel="noopener">Google Calendar</a></li>
+      <li><h3>Recibe el enlace</h3><p>Te enviamos el enlace de la videollamada por correo antes de cada sesión.</p></li>
+    </ol>
+    <p class="privacy"><strong>Tus datos están cuidados.</strong> Usamos tu nombre, correo y WhatsApp solo para organizar el club y enviarte recordatorios y el enlace de cada sesión. No los compartimos ni los vendemos, y puedes pedir que los corrijamos o borremos cuando quieras. Los detalles completos están en el formulario de inscripción.</p>
+  </section>
+
+  <footer>Evoluser · Laboratorio de Emprendedores: Season 1 · Sesiones en línea cada dos semanas, en español · Del 17 de octubre al 12 de diciembre de 2026</footer>
+</div>
+
+<script>
+// Light / dark toggle (defaults to the visitor's system setting)
+(function () {
+  const root = document.documentElement, btn = document.getElementById("theme-toggle");
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+  try { const saved = localStorage.getItem("evoluser-theme"); if (saved) root.dataset.theme = saved; } catch (e) {}
+  const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : mq.matches;
+  const label = () => { btn.textContent = isDark() ? "☀ Modo claro" : "☾ Modo oscuro"; };
+  btn.addEventListener("click", () => {
+    root.dataset.theme = isDark() ? "light" : "dark";
+    try { localStorage.setItem("evoluser-theme", root.dataset.theme); } catch (e) {}
+    label();
+  });
+  mq.addEventListener("change", label);
+  label();
+})();
+
+// Pega aquí el enlace de tu formulario de inscripción (Google Forms, Tally, etc.)
+const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSf1BmPuznCAt2qqKYrJ_fanXdp1sO1281HYYGC3FJwZ0fZXoA/viewform";
+
+const NY = "America/New_York", ES = "Europe/Madrid", VE = "America/Caracas";
+const LOCAL = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+// Sessions are anchored to 10:00 in Caracas, which is UTC-4 all year (no daylight saving)
+function caracasTen(y, m, d) {
+  return new Date(Date.UTC(y, m, d, 14, 0));
+}
+// Every other Saturday starting 17 Oct 2026
+function sessions(n) {
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const d = new Date(Date.UTC(2026, 9, 17 + i * 14));
+    const start = caracasTen(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+    const kind = i === 0 ? "Kick-off: intenciones" : i === 1 ? "Meta del trimestre" : i === n - 1 ? "Celebración de cierre" : "Avances y accountability";
+    out.push({ start, end: new Date(start.getTime() + 90 * 60000), kind });
+  }
+  return out;
+}
+const fmtTime = (tz) => new Intl.DateTimeFormat("es-ES", { timeZone: tz, hour: "2-digit", minute: "2-digit", hour12: false });
+const fmtDay = (tz) => new Intl.DateTimeFormat("es-ES", { timeZone: tz, weekday: "short", day: "numeric", month: "short" });
+const range = (s, tz) => fmtTime(tz).format(s.start) + " – " + fmtTime(tz).format(s.end);
+function localRange(s) {
+  const sameDay = fmtDay(LOCAL).format(s.start) === fmtDay(VE).format(s.start);
+  return range(s, LOCAL) + (sameDay ? "" : " (" + fmtDay(LOCAL).format(s.start) + ")");
+}
+
+const now = Date.now();
+const all = sessions(5);
+const upcoming = all.filter(s => s.end.getTime() > now).slice(0, 6);
+const next = upcoming[0];
+
+if (next) {
+  const isFirst = next === all[0];
+  document.getElementById("ticket-label").textContent = (isFirst ? "Primera sesión" : "Próxima sesión") + " · " + next.kind;
+  const long = new Intl.DateTimeFormat("es-ES", { timeZone: VE, weekday: "long", day: "numeric", month: "long" }).format(next.start);
+  document.getElementById("next-date").textContent = long.charAt(0).toUpperCase() + long.slice(1);
+  document.getElementById("t-ny").textContent = range(next, NY);
+  document.getElementById("t-ve").textContent = range(next, VE);
+  document.getElementById("t-es").textContent = range(next, ES);
+  document.getElementById("t-local").textContent = localRange(next);
+  // Count calendar days in the viewer's own time zone
+  const dayKey = (t) => { const p = new Intl.DateTimeFormat("en-CA", { timeZone: LOCAL }).format(t); return Date.UTC(+p.slice(0, 4), +p.slice(5, 7) - 1, +p.slice(8, 10)); };
+  const days = Math.round((dayKey(next.start) - dayKey(new Date(now))) / 86400000);
+  document.getElementById("countdown").innerHTML =
+    next.start.getTime() <= now ? "<strong>Está ocurriendo ahora.</strong>" :
+    days === 0 ? "<strong>Es hoy.</strong>" :
+    days === 1 ? "<strong>Es mañana.</strong>" : "Faltan <strong>" + days + " días</strong>.";
+} else {
+  // Season finished
+  document.getElementById("ticket-label").textContent = "Season 1 terminada";
+  document.getElementById("next-date").textContent = "¡Gracias por ser parte!";
+  document.querySelector(".ticket .times").hidden = true;
+  document.getElementById("countdown").textContent = "Pronto anunciamos la Season 2.";
+}
+
+const body = document.getElementById("dates-body");
+(upcoming.length ? upcoming : all).forEach((s, i) => {
+  const tr = document.createElement("tr");
+  tr.className = [i === 0 && next ? "next" : "", s === all[all.length - 1] ? "party" : ""].join(" ").trim();
+  const day = new Intl.DateTimeFormat("es-ES", { timeZone: VE, weekday: "short", day: "numeric", month: "short" }).format(s.start);
+  [day, s.kind, range(s, VE), range(s, NY), range(s, ES), localRange(s)].forEach((txt, j) => {
+    const td = document.createElement("td");
+    td.textContent = txt;
+    if (j > 1) td.className = "mono";
+    tr.appendChild(td);
+  });
+  body.appendChild(tr);
+});
+
+const details = "Encuentro quincenal para emprendedores que trabajan solos: avances, ideas y accountability partner.\n\nSeason 1: 5 sesiones cada dos semanas (17 oct – 12 dic), sábados de 10:00 a 11:30 hora de Caracas. En la página está la hora de Miami y España para cada fecha.\nEl enlace de la videollamada llega por correo antes de cada sesión.";
+const cal = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+  "&text=" + encodeURIComponent("Evoluser · Laboratorio de Emprendedores: Season 1") +
+  "&dates=20261017T100000/20261017T113000&ctz=" + encodeURIComponent(VE) +
+  "&recur=" + encodeURIComponent("RRULE:FREQ=WEEKLY;INTERVAL=2;BYDAY=SA;COUNT=5") +
+  "&details=" + encodeURIComponent(details) +
+  "&location=" + encodeURIComponent("En línea");
+document.getElementById("cal-btn").href = cal;
+document.getElementById("cal-btn-hero").href = cal;
+
+const formBtn = document.getElementById("form-btn");
+if (FORM_URL) {
+  formBtn.href = FORM_URL;
+} else {
+  formBtn.removeAttribute("target");
+  formBtn.setAttribute("aria-disabled", "true");
+  formBtn.textContent = "Formulario disponible pronto";
+  formBtn.addEventListener("click", e => e.preventDefault());
+}
+</script>
+</body>
+</html>
